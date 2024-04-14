@@ -188,7 +188,7 @@ class Ball:
             return False
     #Controllo Collisione paddle 4
     
-    #Test perchè commit non funziona cazzo
+    #Test perchè commit non funziona cazzooooo
     
     def detect_collision_4(self, obj, player4=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
