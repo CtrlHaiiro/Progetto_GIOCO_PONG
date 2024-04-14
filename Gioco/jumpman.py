@@ -92,20 +92,20 @@ class Ball:
         pyxel.circ(self.x, self.y, self.r, 7)
 
     def update(self):
-         self.x += self.speedX
-         self.y += self.speedY
-         if self.x + self.r >= pyxel.width:
+        self.x += self.speedX
+        self.y += self.speedY
+        if self.x + self.r >= pyxel.width:
              self.speedX = (self.speedX * -1)-0.1
         
-             #self.out_of_bounds = True
-         elif self.x - self.r <= 0:
+            #self.out_of_bounds = True
+        elif self.x - self.r <= 0:
              self.speedX = (self.speedX * -1)+0.1
 
-             #self.out_of_bounds = True
-         elif self.y - self.r <= 0:
+            #self.out_of_bounds = True
+        elif self.y - self.r <= 0:
              self.speedY = (self.speedY * -1)+0.1
-             
-         elif self.y + self.r >= pyxel.height:
+            
+        elif self.y + self.r >= pyxel.height:
              self.speedY = (self.speedY * -1)-0.1
     #Controllo collisione paddle 1           
     def detect_collision_1(self, obj, player=False):
@@ -122,10 +122,10 @@ class Ball:
             n = rd.randrange(-1,2,2)
 
             if (
-              sub_ball_x + self.r >= obj.x
-              and sub_ball_x - self.r <= obj.x + obj.w
-              and sub_ball_y + self.r >= obj.y
-              and sub_ball_y - self.r <= obj.y + obj.h
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + obj.h
             ):
                 if player:
                     self.speedX = self.speedX * -1
@@ -149,10 +149,10 @@ class Ball:
             n = rd.randrange(-1,2,2)
 
             if (
-              sub_ball_x + self.r >= obj.x
-              and sub_ball_x - self.r <= obj.x + obj.w
-              and sub_ball_y + self.r >= obj.y
-              and sub_ball_y - self.r <= obj.y + obj.h
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + obj.h
             ):
                 if player2:
                     self.speedX = self.speedX * -1
@@ -176,10 +176,10 @@ class Ball:
             n = rd.randrange(-1,2,2)
 
             if (
-              sub_ball_x + self.r >= obj.x
-              and sub_ball_x - self.r <= obj.x + obj.w
-              and sub_ball_y + self.r >= obj.y
-              and sub_ball_y - self.r <= obj.y + obj.h
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + obj.h
             ):
                 if player3:
                     self.speedX = self.speedX * -1
@@ -187,6 +187,9 @@ class Ball:
                     return True
             return False
     #Controllo Collisione paddle 4
+    
+    #Test perchè commit non funziona cazzo
+    
     def detect_collision_4(self, obj, player4=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
         if num_steps == 0:
@@ -202,10 +205,10 @@ class Ball:
             n = rd.randrange(-1,2,2)
 
             if (
-              sub_ball_x + self.r >= obj.x
-              and sub_ball_x - self.r <= obj.x + obj.w
-              and sub_ball_y + self.r >= obj.y
-              and sub_ball_y - self.r <= obj.y + obj.h
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + obj.h
             ):
                 if player4:
                     self.speedX = self.speedX * -1
