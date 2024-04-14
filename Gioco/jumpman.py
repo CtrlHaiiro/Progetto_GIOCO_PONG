@@ -58,6 +58,26 @@ class Player3:
     def draw(self):
         pyxel.rectb(self.x, self.y,8,8,9)
 
+#Giocatore 4 Small
+class Player4:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.w = 8
+        self.h = 8
+
+    def update(self):
+        if pyxel.btn(pyxel.KEY_I) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_UP):
+            self.y = self.y - 3
+        if pyxel.btn(pyxel.KEY_K) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN):
+            self.y = self.y + 3
+        if pyxel.btn(pyxel.KEY_J)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT):
+            self.x = self.x + 3
+        if pyxel.btn(pyxel.KEY_L)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT):
+            self.x = self.x - 3
+    def draw(self):
+        pyxel.rectb(self.x, self.y,8,8,9)
+
 #Palla
 class Ball:
     def __init__(self,x,y):
@@ -166,6 +186,33 @@ class Ball:
                     self.speedY = self.speedY * n
                     return True
             return False
+    #Controllo Collisione paddle 4
+    def detect_collision_4(self, obj, player4=False):
+        num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
+        if num_steps == 0:
+            return False
+        
+        step_size = 1.0/num_steps
+        
+        for step in range(1, num_steps + 1):
+            t = step * step_size
+            sub_ball_x = self.x + t * self.speedX
+            sub_ball_y = self.y + t *self.speedY
+
+            n = rd.randrange(-1,2,2)
+
+            if (
+              sub_ball_x + self.r >= obj.x
+              and sub_ball_x - self.r <= obj.x + obj.w
+              and sub_ball_y + self.r >= obj.y
+              and sub_ball_y - self.r <= obj.y + obj.h
+            ):
+                if player4:
+                    self.speedX = self.speedX * -1
+                    self.speedY = self.speedY * n
+                    return True
+            return False
+
 
 
 #Principale 
@@ -175,6 +222,7 @@ class App:
         self.player = Player1(30, 109)
         self.player2 = Player2(340,109)
         self.player3 = Player3(56, 116)
+        self.player4 = Player4(366, 116)
         self.ball = Ball(200,120)
         pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
         pyxel.run(self.update, self.draw)
@@ -183,10 +231,12 @@ class App:
         self.player.update()
         self.player2.update()
         self.player3.update()
+        self.player4.update()
         self.ball.update()
         self.check_collision_1()
         self.check_collision_2()
         self.check_collision_3()
+        self.check_collision_4()
         if pyxel.btn(pyxel.KEY_Q):
             pyxel.quit()
 
@@ -206,10 +256,16 @@ class App:
         if collision:
             pass
     
+    def check_collision_3(self):
+        collision = self.ball.detect_collision_4(self.player4, player4=True)
+        if collision:
+            pass
+    
     def draw(self):
         pyxel.cls(0)
         self.player.draw()
         self.player2.draw()
         self.player3.draw()
+        self.player4.draw()
         self.ball.draw()
 App()
