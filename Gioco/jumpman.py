@@ -259,7 +259,7 @@ class App:
         if collision:
             pass
     
-    def check_collision_3(self):
+    def check_collision_4(self):
         collision = self.ball.detect_collision_4(self.player4, player4=True)
         if collision:
             pass
