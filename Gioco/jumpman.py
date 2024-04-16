@@ -145,9 +145,8 @@ class Ball:
             t = step * step_size
             sub_ball_x = self.x + t * self.speedX
             sub_ball_y = self.y + t *self.speedY
-
             n = rd.randrange(-1,2,2)
-
+            
             if (
             sub_ball_x + self.r >= obj.x
             and sub_ball_x - self.r <= obj.x + obj.w
@@ -172,7 +171,6 @@ class Ball:
             t = step * step_size
             sub_ball_x = self.x + t * self.speedX
             sub_ball_y = self.y + t *self.speedY
-
             n = rd.randrange(-1,2,2)
 
             if (
@@ -187,8 +185,6 @@ class Ball:
                     return True
             return False
     #Controllo Collisione paddle 4
-    
-    #Test perchè commit non funziona cazzooooo
     
     def detect_collision_4(self, obj, player4=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
@@ -271,4 +267,5 @@ class App:
         self.player3.draw()
         self.player4.draw()
         self.ball.draw()
+
 App()
