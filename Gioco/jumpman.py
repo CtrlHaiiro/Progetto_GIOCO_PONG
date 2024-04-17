@@ -7,8 +7,8 @@ class Player1:
     def __init__(self, x, y):
         self.x = x
         self.y = y 
-        self.w = 4
-        self.h = 32
+        self.w = 8
+        self.h = 40
     def update(self):
         if pyxel.btn(pyxel.KEY_W):
             self.y = self.y - 2
@@ -17,16 +17,17 @@ class Player1:
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 0, 0, 8, 8)
         pyxel.blt(self.x, self.y+8, 0, 0, 8, 8, 8)
-        pyxel.blt(self.x, self.y+16, 0, 8, 0, 8, 8)
-        pyxel.blt(self.x, self.y+24, 0, 8, 8, 8,8)
+        pyxel.blt(self.x,self.y+16, 0, 0, 16, 8, 8)
+        pyxel.blt(self.x, self.y+24, 0, 8, 0, 8, 8)
+        pyxel.blt(self.x, self.y+32, 0, 8, 8, 8, 8)
         
 #Giocatore 2 Ver
 class Player2:
     def __init__(self, x, y):
         self.x = x
         self.y = y 
-        self.w = 4
-        self.h = 32
+        self.w = 8
+        self.h = 40
     def update(self):
         if pyxel.btn(pyxel.KEY_UP):
             self.y = self.y - 2
@@ -35,8 +36,9 @@ class Player2:
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 16, 0, 8, 8)
         pyxel.blt(self.x, self.y+8, 0, 16, 8, 8, 8)
-        pyxel.blt(self.x, self.y+16, 0, 24, 0, 8, 8)
-        pyxel.blt(self.x, self.y+24, 0, 24, 8, 8,8)
+        pyxel.blt(self.x, self.y+16, 0, 16, 16, 8, 8)
+        pyxel.blt(self.x, self.y+24, 0, 24, 0, 8, 8)
+        pyxel.blt(self.x, self.y+32, 0, 24, 8, 8,8)
 
 #Giocatore 3 Small
 class Player3:
@@ -72,9 +74,9 @@ class Player4:
         if pyxel.btn(pyxel.KEY_K) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN):
             self.y = self.y + 3
         if pyxel.btn(pyxel.KEY_J)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT):
-            self.x = self.x + 3
-        if pyxel.btn(pyxel.KEY_L)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT):
             self.x = self.x - 3
+        if pyxel.btn(pyxel.KEY_L)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT):
+            self.x = self.x + 3
     def draw(self):
         pyxel.rectb(self.x, self.y,8,8,9)
 
@@ -120,18 +122,63 @@ class Ball:
             sub_ball_x = self.x + t * self.speedX
             sub_ball_y = self.y + t *self.speedY
             n = rd.randrange(-1,2,2)
+            m = rd.randint(-1,1)
 
             if (
             sub_ball_x + self.r >= obj.x
             and sub_ball_x - self.r <= obj.x + obj.w
             and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + obj.h
+            and sub_ball_y - self.r <= obj.y + 8
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    self.speedY = self.speedY * -1
+                    return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 16
             ):
                 if player:
                     self.speedX = self.speedX * -1
                     self.speedY = self.speedY * n
                     return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 24
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-1.5)*n
+                    else:
+                        self.speedY = self.speedY * m
+                    return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 32
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    self.speedY = self.speedY * n
+                    return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 40
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    self.speedY = self.speedY * -1
+                    return True
             return False
+
     
     #Controllo collisione paddle 2
     def detect_collision_2(self, obj, player2=False):
@@ -146,16 +193,60 @@ class Ball:
             sub_ball_x = self.x + t * self.speedX
             sub_ball_y = self.y + t *self.speedY
             n = rd.randrange(-1,2,2)
-            
+            m = rd.randint(-1,1)
+
             if (
             sub_ball_x + self.r >= obj.x
             and sub_ball_x - self.r <= obj.x + obj.w
             and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + obj.h
+            and sub_ball_y - self.r <= obj.y + 8
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    self.speedY = self.speedY * -1
+                    return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 16
             ):
                 if player2:
                     self.speedX = self.speedX * -1
                     self.speedY = self.speedY * n
+                    return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 24
+            ):
+                if player2:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-1.5)*n
+                    else:
+                        self.speedY = self.speedY * m
+                    return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 32
+            ):
+                if player2:
+                    self.speedX = self.speedX * -1
+                    self.speedY = self.speedY * n
+                    return True
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 40
+            ):
+                if player2:
+                    self.speedX = self.speedX * -1
+                    self.speedY = self.speedY * -1
                     return True
             return False
 
@@ -184,8 +275,8 @@ class Ball:
                     self.speedY = self.speedY * n
                     return True
             return False
+
     #Controllo Collisione paddle 4
-    
     def detect_collision_4(self, obj, player4=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
         if num_steps == 0:
