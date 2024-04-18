@@ -201,7 +201,7 @@ class Ball:
             and sub_ball_y + self.r >= obj.y
             and sub_ball_y - self.r <= obj.y + 8
             ):
-                if player:
+                if player2:
                     self.speedX = self.speedX * -1
                     self.speedY = self.speedY * -1
                     return True
