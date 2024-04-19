@@ -11,6 +11,7 @@ from math import copysign, ceil
 # Balancing
 # Player 3 e 4 Sprite
 # Altro?
+# Git Push o Commit non funge
 
 #Giocatore 1 Ver
 class Player1:
