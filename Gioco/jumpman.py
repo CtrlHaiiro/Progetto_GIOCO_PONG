@@ -153,21 +153,21 @@ class Ball:
         self.y += self.speedY
         if self.x + self.r >= screenx - 73:
              self.speedX = (self.speedX * -1)-0.1
-             self.directionX = 1
+             self.directionX = -1
         
             #self.out_of_bounds = True
         elif self.x - self.r <= 71:
              self.speedX = (self.speedX * -1)+0.1
-             self.directionX = -1
+             self.directionX = 1
 
             #self.out_of_bounds = True
         elif self.y - self.r <= 51:
              self.speedY = (self.speedY * -1)+0.1
-             self.directionY = 1
+             self.directionY = -1
             
         elif self.y + self.r >= screeny - 52:
              self.speedY = (self.speedY * -1)-0.1
-             self.directionY = -1
+             self.directionY = 1
     #Controllo collisione paddle 1
 
     def detect_collision_1(self, obj, player=False):
