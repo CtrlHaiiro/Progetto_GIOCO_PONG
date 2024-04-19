@@ -315,10 +315,10 @@ class Ball:
 class App:
     def __init__(self):
         pyxel.init(screenx, screeny, display_scale=2, title = "Screen", fps = 60)
-        self.player = Player1(30, 109)
-        self.player2 = Player2(340,109)
-        self.player3 = Player3(56, 116)
-        self.player4 = Player4(366, 116)
+        self.player = Player1(100, screeny/2 - 20)
+        self.player2 = Player2(screenx - 110, screeny/2 - 20)
+        self.player3 = Player3(150, screeny/2-2)
+        self.player4 = Player4(screenx - 160, screeny/2-2)
         self.ball = Ball(200,120)
         pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
         pyxel.run(self.update, self.draw)
@@ -359,8 +359,10 @@ class App:
     
     def draw(self):
         pyxel.cls(0)
-        pyxel.rect(70, 50, screenx - 140, screeny -100, 16)
+        pyxel.rect(70, 50, screenx - 140, screeny -100, 7)
         pyxel.rect(71, 51, screenx - 142, screeny -102, 0)
+        pyxel.rect(screenx - 73, 51, 3, screeny -102, 9)
+        pyxel.rect(70, 51, 3, screeny -102, 3)
         self.player.draw()
         self.player2.draw()
         self.player3.draw()
