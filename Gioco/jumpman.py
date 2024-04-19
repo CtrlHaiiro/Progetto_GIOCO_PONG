@@ -2,6 +2,15 @@ import pyxel
 import random as rd
 from math import copysign, ceil
 
+### TO DO LIST: ###
+# Aggiungi collisione paddle con campo
+# Aggiungi sistema punteggio
+# Soundtrack
+# Sound effects
+# Grafica sfondo(?)
+# Balancing
+# Player 3 e 4 Sprite
+
 #Giocatore 1 Ver
 class Player1:
     def __init__(self, x, y):
@@ -102,18 +111,18 @@ class Ball:
     def update(self):
         self.x += self.speedX
         self.y += self.speedY
-        if self.x + self.r >= pyxel.width:
+        if self.x + self.r >= screenx - 73:
              self.speedX = (self.speedX * -1)-0.1
         
             #self.out_of_bounds = True
-        elif self.x - self.r <= 0:
+        elif self.x - self.r <= 71:
              self.speedX = (self.speedX * -1)+0.1
 
             #self.out_of_bounds = True
-        elif self.y - self.r <= 0:
+        elif self.y - self.r <= 51:
              self.speedY = (self.speedY * -1)+0.1
             
-        elif self.y + self.r >= pyxel.height:
+        elif self.y + self.r >= screeny - 52:
              self.speedY = (self.speedY * -1)-0.1
     #Controllo collisione paddle 1 
 
@@ -319,7 +328,7 @@ class App:
         self.player2 = Player2(screenx - 110, screeny/2 - 20)
         self.player3 = Player3(150, screeny/2-2)
         self.player4 = Player4(screenx - 160, screeny/2-2)
-        self.ball = Ball(200,120)
+        self.ball = Ball(screenx/2, screeny/2)
         pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
         pyxel.run(self.update, self.draw)
 
