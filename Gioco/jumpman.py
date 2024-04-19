@@ -20,6 +20,7 @@ class Player1:
         self.y = y 
         self.w = 8
         self.h = 40
+        self.direction = 0
 
     def update(self):
         if pyxel.btn(pyxel.KEY_W):
@@ -27,11 +28,14 @@ class Player1:
                 pass
             else:
                 self.y = self.y - 3
+                self.direction = 1
+
         if pyxel.btn(pyxel.KEY_S):
             if self.y > (screeny-93):
                 pass
             else:
                 self.y = self.y + 3
+                self.direction = -1
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 0, 0, 8, 8)
@@ -47,6 +51,7 @@ class Player2:
         self.y = y 
         self.w = 8
         self.h = 40
+        self.direction = 0
 
     def update(self):
         if pyxel.btn(pyxel.KEY_UP):
@@ -54,11 +59,14 @@ class Player2:
                 pass
             else:
                 self.y = self.y - 3
+                self.direction = 1
+
         if pyxel.btn(pyxel.KEY_DOWN):
             if self.y > (screeny-93):
                 pass
             else:
                 self.y = self.y + 3
+                self.direction = -1
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 16, 0, 8, 8)
@@ -74,16 +82,24 @@ class Player3:
         self.y = y
         self.w = 8
         self.h = 8
+        self.direction = 0
 
     def update(self):
         if pyxel.btn(pyxel.KEY_R) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_UP):
             self.y = self.y - 3
+            self.direction = 1
+
         if pyxel.btn(pyxel.KEY_F) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN):
             self.y = self.y + 3
+            self.direction = 2
+
         if pyxel.btn(pyxel.KEY_G)or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT):
             self.x = self.x + 3
+            self.direction = 3
+
         if pyxel.btn(pyxel.KEY_D)or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT):
             self.x = self.x - 3
+            self.direction = 4
 
     def draw(self):
         pyxel.rectb(self.x, self.y,8,8,9)
@@ -95,16 +111,24 @@ class Player4:
         self.y = y
         self.w = 8
         self.h = 8
+        self.direction = 0
 
     def update(self):
         if pyxel.btn(pyxel.KEY_I) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_UP):
             self.y = self.y - 3
+            self.direction = 1
+
         if pyxel.btn(pyxel.KEY_K) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN):
             self.y = self.y + 3
+            self.direction = 2
+
         if pyxel.btn(pyxel.KEY_J)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT):
             self.x = self.x - 3
+            self.direction = 3
+
         if pyxel.btn(pyxel.KEY_L)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT):
             self.x = self.x + 3
+            self.direction = 4
 
     def draw(self):
         pyxel.rectb(self.x, self.y,8,8,9)
@@ -118,6 +142,8 @@ class Ball:
         self.speedY = -1.0
         self.r = 2
         self.out_of_bounds = False
+        self.directionY = 0
+        self.directionX = 0
 
     def draw(self):
         pyxel.circ(self.x, self.y, self.r, 7)
@@ -127,18 +153,22 @@ class Ball:
         self.y += self.speedY
         if self.x + self.r >= screenx - 73:
              self.speedX = (self.speedX * -1)-0.1
+             self.directionX = 1
         
             #self.out_of_bounds = True
         elif self.x - self.r <= 71:
              self.speedX = (self.speedX * -1)+0.1
+             self.directionX = -1
 
             #self.out_of_bounds = True
         elif self.y - self.r <= 51:
              self.speedY = (self.speedY * -1)+0.1
+             self.directionY = 1
             
         elif self.y + self.r >= screeny - 52:
              self.speedY = (self.speedY * -1)-0.1
-    #Controllo collisione paddle 1 
+             self.directionY = -1
+    #Controllo collisione paddle 1
 
     def detect_collision_1(self, obj, player=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
