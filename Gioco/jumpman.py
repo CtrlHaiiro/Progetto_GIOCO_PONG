@@ -9,18 +9,20 @@ class Player1:
         self.y = y 
         self.w = 8
         self.h = 40
+
     def update(self):
         if pyxel.btn(pyxel.KEY_W):
             self.y = self.y - 2
         if pyxel.btn(pyxel.KEY_S):
             self.y = self.y + 2
+
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 0, 0, 8, 8)
         pyxel.blt(self.x, self.y+8, 0, 0, 8, 8, 8)
         pyxel.blt(self.x,self.y+16, 0, 0, 16, 8, 8)
         pyxel.blt(self.x, self.y+24, 0, 8, 0, 8, 8)
         pyxel.blt(self.x, self.y+32, 0, 8, 8, 8, 8)
-        
+
 #Giocatore 2 Ver
 class Player2:
     def __init__(self, x, y):
@@ -28,11 +30,13 @@ class Player2:
         self.y = y 
         self.w = 8
         self.h = 40
+
     def update(self):
         if pyxel.btn(pyxel.KEY_UP):
             self.y = self.y - 2
         if pyxel.btn(pyxel.KEY_DOWN):
             self.y = self.y + 2
+
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 16, 0, 8, 8)
         pyxel.blt(self.x, self.y+8, 0, 16, 8, 8, 8)
@@ -57,6 +61,7 @@ class Player3:
             self.x = self.x + 3
         if pyxel.btn(pyxel.KEY_D)or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT):
             self.x = self.x - 3
+
     def draw(self):
         pyxel.rectb(self.x, self.y,8,8,9)
 
@@ -77,6 +82,7 @@ class Player4:
             self.x = self.x - 3
         if pyxel.btn(pyxel.KEY_L)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT):
             self.x = self.x + 3
+
     def draw(self):
         pyxel.rectb(self.x, self.y,8,8,9)
 
@@ -109,7 +115,8 @@ class Ball:
             
         elif self.y + self.r >= pyxel.height:
              self.speedY = (self.speedY * -1)-0.1
-    #Controllo collisione paddle 1           
+    #Controllo collisione paddle 1 
+
     def detect_collision_1(self, obj, player=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
         if num_steps == 0:
@@ -178,9 +185,8 @@ class Ball:
                     self.speedY = self.speedY * -1
                     return True
             return False
-
-    
     #Controllo collisione paddle 2
+
     def detect_collision_2(self, obj, player2=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
         if num_steps == 0:
@@ -308,7 +314,7 @@ class Ball:
 #Principale 
 class App:
     def __init__(self):
-        pyxel.init(400, 240, display_scale=3, title = "Screen", fps = 60)
+        pyxel.init(screenx, screeny, display_scale=2, title = "Screen", fps = 60)
         self.player = Player1(30, 109)
         self.player2 = Player2(340,109)
         self.player3 = Player3(56, 116)
@@ -353,10 +359,16 @@ class App:
     
     def draw(self):
         pyxel.cls(0)
+        pyxel.rect(70, 50, screenx - 140, screeny -100, 16)
+        pyxel.rect(71, 51, screenx - 142, screeny -102, 0)
         self.player.draw()
         self.player2.draw()
         self.player3.draw()
         self.player4.draw()
         self.ball.draw()
+
+
+screenx = 750
+screeny= 420
 
 App()
