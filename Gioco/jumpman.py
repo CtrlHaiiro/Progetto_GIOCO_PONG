@@ -10,6 +10,7 @@ from math import copysign, ceil
 # Grafica sfondo(?)
 # Balancing
 # Player 3 e 4 Sprite
+# Altro?
 
 #Giocatore 1 Ver
 class Player1:
