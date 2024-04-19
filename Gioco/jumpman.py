@@ -23,9 +23,15 @@ class Player1:
 
     def update(self):
         if pyxel.btn(pyxel.KEY_W):
-            self.y = self.y - 2
+            if self.y < 53:
+                pass
+            else:
+                self.y = self.y - 3
         if pyxel.btn(pyxel.KEY_S):
-            self.y = self.y + 2
+            if self.y > (screeny-93):
+                pass
+            else:
+                self.y = self.y + 3
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 0, 0, 8, 8)
@@ -44,9 +50,15 @@ class Player2:
 
     def update(self):
         if pyxel.btn(pyxel.KEY_UP):
-            self.y = self.y - 2
+            if self.y < 53:
+                pass
+            else:
+                self.y = self.y - 3
         if pyxel.btn(pyxel.KEY_DOWN):
-            self.y = self.y + 2
+            if self.y > (screeny-93):
+                pass
+            else:
+                self.y = self.y + 3
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 16, 0, 8, 8)
