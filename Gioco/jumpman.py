@@ -12,6 +12,9 @@ from math import copysign, ceil
 # Player 3 e 4 Sprite
 # Altro?
 # Git Push o Commit non funge
+#Finire le collisioni tra palla e paddle(3/5)
+#Aggiugere una schermata di scelta modalità
+#Sistemare i Player 3 e 4
 
 #Giocatore 1 Ver
 class Player1:
@@ -37,8 +40,7 @@ class Player1:
             else:
                 self.y = self.y + 3
                 self.direction = -1
-        print(self.direction)
-
+        
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 0, 0, 8, 8)
         pyxel.blt(self.x, self.y+8, 0, 0, 8, 8, 8)
@@ -145,7 +147,6 @@ class Ball:
         self.r = 2
         self.out_of_bounds = False
         self.directionY = 0
-        self.directionX = 0
 
     def draw(self):
         pyxel.circ(self.x, self.y, self.r, 7)
@@ -155,12 +156,10 @@ class Ball:
         self.y += self.speedY
         if self.x + self.r >= screenx - 73:
              self.speedX = (self.speedX * -1)-0.1
-             self.directionX = -1
         
             #self.out_of_bounds = True
         elif self.x - self.r <= 71:
              self.speedX = (self.speedX * -1)+0.1
-             self.directionX = 1
 
             #self.out_of_bounds = True
         elif self.y - self.r <= 51:
@@ -170,8 +169,9 @@ class Ball:
         elif self.y + self.r >= screeny - 52:
              self.speedY = (self.speedY * -1)-0.1
              self.directionY = 1
+        print(self.directionY)
+    
     #Controllo collisione paddle 1
-
     def detect_collision_1(self, obj, player=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
         if num_steps == 0:
@@ -185,40 +185,214 @@ class Ball:
             sub_ball_y = self.y + t *self.speedY
             n = rd.randrange(-1,2,2)
             m = rd.randint(-1,1)
-
+            
+            #Primo segmento
+            #Se sia la palla e il paddle salgono
             if (
             sub_ball_x + self.r >= obj.x
             and sub_ball_x - self.r <= obj.x + obj.w
             and sub_ball_y + self.r >= obj.y
             and sub_ball_y - self.r <= obj.y + 8
+            and self.directionY == 1 
+            and obj.direction == 1
             ):
                 if player:
                     self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY+2)
+                    else:
+                        self.speedY = self.speedY * 1
                     return True
+            #Se la palla sta salendo e il paddle scendendo
             if (
             sub_ball_x + self.r >= obj.x
             and sub_ball_x - self.r <= obj.x + obj.w
             and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 16
-            ):
+            and sub_ball_y - self.r <= obj.y + 8
+            and self.directionY == 1 
+            and obj.direction == -1
+            ): 
                 if player:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
+                    self.speedX = self.speedX*-1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-2)
+                    else:
+                        self.speedY = self.speedY * -1
                     return True
+            
+            #Se la palla sta scendendo e il paddle salendo
             if (
             sub_ball_x + self.r >= obj.x
             and sub_ball_x - self.r <= obj.x + obj.w
             and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 24
+            and sub_ball_y - self.r <= obj.y + 8
+            and self.directionY == -1 
+            and obj.direction == 1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY+2)
+                    else:
+                        self.speedY = self.speedY * -1
+                    return True
+                
+            #Se sia il paddle e la palla stanno scendendo 
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 8
+            and self.directionY == -1 
+            and obj.direction == -1
             ):
                 if player:
                     self.speedX = self.speedX * -1
                     if (self.speedY == 0):
                         self.speedY = (self.speedY-1.5)*n
                     else:
-                        self.speedY = self.speedY * m
+                        self.speedY = self.speedY * 1
                     return True
+            
+            #Secondo segmento
+            #Se stanno salendo entrambi
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 16
+            and self.directionY == 1
+            and obj.direction == 1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY+1.5)
+                    else:
+                        self.speedY = self.speedY * 1
+                    return True
+            
+            #Se il paddle sale e la palla scende
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 16
+            and self.directionY == -1
+            and obj.direction == 1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY+1.5)
+                    else:
+                        self.speedY = self.speedY * -1
+                    return True
+            
+            #Se il paddle scende e la palla sale
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 16
+            and self.directionY == 1
+            and obj.direction == -1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-1.5)
+                    else:
+                        self.speedY = self.speedY * -1
+                    return True
+            
+            # Se entrambi scendono
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 16
+            and self.directionY == -1
+            and obj.direction == -1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-1.5)
+                    else:
+                        self.speedY = self.speedY * 1
+                    return True
+            
+            #Terzo Segmento
+            #Se salgono entrambi
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 24
+            and self.directionY == 1
+            and obj.direction == 1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY+1.5)*m
+                    else:
+                        self.speedY = self.speedY * 1
+                    return True
+            
+            # Se il paddle scende e la palla sale
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 24
+            and self.directionY == 1
+            and obj.direction == -1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-1.5)*m
+                    else:
+                        self.speedY = self.speedY * -1
+                    return True
+            
+            #Se il paddle sale e la palla scende
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 24
+            and self.directionY == -1
+            and obj.direction == 1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-1.5)*m
+                    else:
+                        self.speedY = self.speedY * -1
+                    return True
+            
+            #Se entrambi scendono
+            if (
+            sub_ball_x + self.r >= obj.x
+            and sub_ball_x - self.r <= obj.x + obj.w
+            and sub_ball_y + self.r >= obj.y
+            and sub_ball_y - self.r <= obj.y + 24
+            and self.directionY == -1
+            and obj.direction == -1
+            ):
+                if player:
+                    self.speedX = self.speedX * -1
+                    if (self.speedY == 0):
+                        self.speedY = (self.speedY-1.5)*m
+                    else:
+                        self.speedY = self.speedY * 1
+                    return True
+
+
             if (
             sub_ball_x + self.r >= obj.x
             and sub_ball_x - self.r <= obj.x + obj.w
@@ -363,8 +537,6 @@ class Ball:
                     self.speedY = self.speedY * n
                     return True
             return False
-
-
 
 #Principale 
 class App:
