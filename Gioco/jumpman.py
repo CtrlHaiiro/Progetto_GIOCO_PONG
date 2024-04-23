@@ -3,18 +3,16 @@ import random as rd
 from math import copysign, ceil
 
 ### TO DO LIST: ###
-# Aggiungi collisione paddle con campo
-# Aggiungi sistema punteggio
-# Soundtrack
-# Sound effects
-# Grafica sfondo(?)
-# Balancing
-# Player 3 e 4 Sprite
-# Altro?
-# Git Push o Commit non funge
-#Finire le collisioni tra palla e paddle(3/5)
-#Aggiugere una schermata di scelta modalità
-#Sistemare i Player 3 e 4
+# DONE - Aggiungi collisione paddle con campo
+# TO DO - Aggiungi sistema punteggio
+# IN PROGRESS - Soundtrack
+# TO DO - Sound effects
+# TO DECIDE - Grafica sfondo(?)
+# TO DO - Balancing
+# DONE - Player 3 e 4 Sprite
+# IN PROGRESS - Finire le collisioni tra palla e paddle(3/5)
+# TO DO - Aggiugere una schermata di scelta modalità
+# TO DO - Sistemare i Player 3 e 4
 
 #Giocatore 1 Ver
 class Player1:
