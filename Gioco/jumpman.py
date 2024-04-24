@@ -1,6 +1,7 @@
 import pyxel
 import random as rd
 from math import copysign, ceil
+from Palla import Ball
 
 ### TO DO LIST: ###
 # DONE - Aggiungi collisione paddle con campo
@@ -82,8 +83,8 @@ class Player3:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.w = 8
-        self.h = 8
+        self.w = 6
+        self.h = 6
         self.direction = 0
 
     def update(self):
@@ -104,437 +105,37 @@ class Player3:
             self.direction = 4
 
     def draw(self):
-        pyxel.rectb(self.x, self.y,8,8,9)
+        pyxel.blt(self.x, self.y, 0, 33, 9, 6, 6)
 
 #Giocatore 4 Small
 class Player4:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.w = 8
-        self.h = 8
-        self.direction = 0
+        self.w = 6
+        self.h = 6
+        self.directionX = 0
+        self.directionY = 0
 
     def update(self):
         if pyxel.btn(pyxel.KEY_I) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_UP):
             self.y = self.y - 3
-            self.direction = 1
+            self.directionY = 1
 
         if pyxel.btn(pyxel.KEY_K) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN):
             self.y = self.y + 3
-            self.direction = 2
+            self.direction = -1
 
         if pyxel.btn(pyxel.KEY_J)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT):
             self.x = self.x - 3
-            self.direction = 3
+            self.directionX = -1
 
         if pyxel.btn(pyxel.KEY_L)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT):
             self.x = self.x + 3
-            self.direction = 4
+            self.direction = 1
 
     def draw(self):
-        pyxel.rectb(self.x, self.y,8,8,9)
-
-#Palla
-class Ball:
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
-        self.speedX = -1.5
-        self.speedY = -1.0
-        self.r = 2
-        self.out_of_bounds = False
-        self.directionY = 0
-
-    def draw(self):
-        pyxel.circ(self.x, self.y, self.r, 7)
-
-    def update(self):
-        self.x += self.speedX
-        self.y += self.speedY
-        if self.x + self.r >= screenx - 73:
-            self.speedX = (self.speedX * -1)-0.1
-        
-            #self.out_of_bounds = True
-        elif self.x - self.r <= 71:
-            self.speedX = (self.speedX * -1)+0.1
-
-            #self.out_of_bounds = True
-        elif self.y - self.r <= 51:
-            self.speedY = (self.speedY * -1)+0.1
-            self.directionY = -1
-            
-        elif self.y + self.r >= screeny - 52:
-            self.speedY = (self.speedY * -1)-0.1
-            self.directionY = 1
-        print(self.directionY)
-    
-    #Controllo collisione paddle 1
-    def detect_collision_1(self, obj, player=False):
-        num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
-        if num_steps == 0:
-            return False
-        
-        step_size = 1.0/num_steps
-        
-        for step in range(1, num_steps + 1):
-            t = step * step_size
-            sub_ball_x = self.x + t * self.speedX
-            sub_ball_y = self.y + t *self.speedY
-            n = rd.randrange(-1,2,2)
-            m = rd.randint(-1,1)
-            
-            #Primo segmento
-            #Se sia la palla e il paddle salgono
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 8
-            and self.directionY == 1 
-            and obj.direction == 1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY+2)
-                    else:
-                        self.speedY = self.speedY * 1
-                    return True
-            #Se la palla sta salendo e il paddle scendendo
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 8
-            and self.directionY == 1 
-            and obj.direction == -1
-            ): 
-                if player:
-                    self.speedX = self.speedX*-1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-2)
-                    else:
-                        self.speedY = self.speedY * -1
-                    return True
-            
-            #Se la palla sta scendendo e il paddle salendo
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 8
-            and self.directionY == -1 
-            and obj.direction == 1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY+2)
-                    else:
-                        self.speedY = self.speedY * -1
-                    return True
-                
-            #Se sia il paddle e la palla stanno scendendo 
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 8
-            and self.directionY == -1 
-            and obj.direction == -1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-1.5)*n
-                    else:
-                        self.speedY = self.speedY * 1
-                    return True
-            
-            #Secondo segmento
-            #Se stanno salendo entrambi
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 16
-            and self.directionY == 1
-            and obj.direction == 1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY+1.5)
-                    else:
-                        self.speedY = self.speedY * 1
-                    return True
-            
-            #Se il paddle sale e la palla scende
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 16
-            and self.directionY == -1
-            and obj.direction == 1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY+1.5)
-                    else:
-                        self.speedY = self.speedY * -1
-                    return True
-            
-            #Se il paddle scende e la palla sale
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 16
-            and self.directionY == 1
-            and obj.direction == -1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-1.5)
-                    else:
-                        self.speedY = self.speedY * -1
-                    return True
-            
-            # Se entrambi scendono
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 16
-            and self.directionY == -1
-            and obj.direction == -1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-1.5)
-                    else:
-                        self.speedY = self.speedY * 1
-                    return True
-            
-            #Terzo Segmento
-            #Se salgono entrambi
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 24
-            and self.directionY == 1
-            and obj.direction == 1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY+1.5)*m
-                    else:
-                        self.speedY = self.speedY * 1
-                    return True
-            
-            # Se il paddle scende e la palla sale
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 24
-            and self.directionY == 1
-            and obj.direction == -1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-1.5)*m
-                    else:
-                        self.speedY = self.speedY * -1
-                    return True
-            
-            #Se il paddle sale e la palla scende
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 24
-            and self.directionY == -1
-            and obj.direction == 1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-1.5)*m
-                    else:
-                        self.speedY = self.speedY * -1
-                    return True
-            
-            #Se entrambi scendono
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 24
-            and self.directionY == -1
-            and obj.direction == -1
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-1.5)*m
-                    else:
-                        self.speedY = self.speedY * 1
-                    return True
-
-
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 32
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
-                    return True
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 40
-            ):
-                if player:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * -1
-                    return True
-            return False
-    #Controllo collisione paddle 2
-
-    def detect_collision_2(self, obj, player2=False):
-        num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
-        if num_steps == 0:
-            return False
-        
-        step_size = 1.0/num_steps
-        
-        for step in range(1, num_steps + 1):
-            t = step * step_size
-            sub_ball_x = self.x + t * self.speedX
-            sub_ball_y = self.y + t *self.speedY
-            n = rd.randrange(-1,2,2)
-            m = rd.randint(-1,1)
-
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 8
-            ):
-                if player2:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * -1
-                    return True
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 16
-            ):
-                if player2:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
-                    return True
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 24
-            ):
-                if player2:
-                    self.speedX = self.speedX * -1
-                    if (self.speedY == 0):
-                        self.speedY = (self.speedY-1.5)*n
-                    else:
-                        self.speedY = self.speedY * m
-                    return True
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 32
-            ):
-                if player2:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
-                    return True
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + 40
-            ):
-                if player2:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * -1
-                    return True
-            return False
-
-#Controllo Collisione paddle 3 
-    def detect_collision_3(self, obj, player3=False):
-        num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
-        if num_steps == 0:
-            return False
-        
-        step_size = 1.0/num_steps
-        
-        for step in range(1, num_steps + 1):
-            t = step * step_size
-            sub_ball_x = self.x + t * self.speedX
-            sub_ball_y = self.y + t *self.speedY
-            n = rd.randrange(-1,2,2)
-
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + obj.h
-            ):
-                if player3:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
-                    return True
-            return False
-
-    #Controllo Collisione paddle 4
-    def detect_collision_4(self, obj, player4=False):
-        num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
-        if num_steps == 0:
-            return False
-        
-        step_size = 1.0/num_steps
-        
-        for step in range(1, num_steps + 1):
-            t = step * step_size
-            sub_ball_x = self.x + t * self.speedX
-            sub_ball_y = self.y + t *self.speedY
-
-            n = rd.randrange(-1,2,2)
-
-            if (
-            sub_ball_x + self.r >= obj.x
-            and sub_ball_x - self.r <= obj.x + obj.w
-            and sub_ball_y + self.r >= obj.y
-            and sub_ball_y - self.r <= obj.y + obj.h
-            ):
-                if player4:
-                    self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
-                    return True
-            return False
+        pyxel.blt(self.x, self.y, 0, 33, 1, 6, 6)
 
 #Principale 
 class App:
@@ -558,6 +159,7 @@ class App:
         self.check_collision_2()
         self.check_collision_3()
         self.check_collision_4()
+        self.respawn()
         if pyxel.btn(pyxel.KEY_Q):
             pyxel.quit()
 
@@ -582,6 +184,11 @@ class App:
         if collision:
             pass
     
+    def respawn(self):
+        resp = self.ball.Respawn_Ball()
+        if resp:
+            pass
+
     def draw(self):
         pyxel.cls(0)
         pyxel.rect(70, 50, screenx - 140, screeny -100, 7)
