@@ -2,6 +2,7 @@ import pyxel
 import random as rd
 from math import copysign, ceil
 
+
 screenx = 750
 screeny= 420
 
@@ -16,9 +17,10 @@ class Ball:
         self.out_of_bounds = False
         self.spawn = 0
         self.directionY = 1
+        self.COLOR = 7
 
     def draw(self):
-        pyxel.circ(self.x, self.y, self.r, 7)
+        pyxel.circ(self.x, self.y, self.r, self.COLOR)
 
     def update(self):
         self.x += self.speedX
@@ -33,12 +35,12 @@ class Ball:
 
         elif self.y - self.r <= 51:
             self.speedY = (self.speedY * -1)+0.1
-            self.speedX = (self.speedX * 1)+0.1
+            self.speedX = self.speedX +0.1
             self.directionY = -1
             
         elif self.y + self.r >= screeny - 52:
             self.speedY = (self.speedY * -1)-0.1
-            self.speedX = (self.speedX * 1)-0.1
+            self.speedX = self.speedX -0.1
 
             self.directionY = 1
         print(self.speedX)
@@ -895,5 +897,14 @@ class Ball:
             self.y = (screeny/2)
             self.speedX = 1.5
             self.speedY = 1.5
-
             self.out_of_bounds = False
+        self.COLOR = 7
+    
+    #Cambiare colore alla palla
+    def Change_Color(self):
+        if (self.speedX >= 2 or self.speedX <= -2):
+            self.COLOR = 10
+        elif (self.speedX >= 3 or self.speedX <= -3):
+            self.COLOR = 9
+        elif(self.speedX >= 4 or self.speedX <= -4):
+            self.COLOR = 8
