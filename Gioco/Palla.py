@@ -899,6 +899,7 @@ class Ball:
             self.speedY = 1.5
             self.out_of_bounds = False
         self.COLOR = 7
+        self.spawn = 0
     
     #Cambiare colore alla palla
     def Change_Color(self):
@@ -908,3 +909,4 @@ class Ball:
             self.COLOR = 9
         elif(self.speedX >= 4 or self.speedX <= -4):
             self.COLOR = 8
+
