@@ -18,6 +18,8 @@ class Ball:
         self.spawn = 0
         self.directionY = 1
         self.COLOR = 7
+        self.point1 = 0
+        self.point2 = 0
 
     def draw(self):
         pyxel.circ(self.x, self.y, self.r, self.COLOR)
@@ -35,15 +37,14 @@ class Ball:
 
         elif self.y - self.r <= 51:
             self.speedY = (self.speedY * -1)+0.1
-            self.speedX = self.speedX +0.1
+            self.speedX = (self.speedX * 1) - 0.1
             self.directionY = -1
             
         elif self.y + self.r >= screeny - 52:
-            self.speedY = (self.speedY * -1)-0.1
-            self.speedX = self.speedX -0.1
+            self.speedY = (self.speedY * -1) - 0.1
+            self.speedX = (self.speedX * 1) + 0.1
 
             self.directionY = 1
-        print(self.speedX)
     
     #Controllo collisione paddle 1
     def detect_collision_1(self, obj, player=False):
@@ -892,12 +893,14 @@ class Ball:
             self.speedX = -1.5
             self.speedY = -1.5
             self.out_of_bounds = False
+            self.point1 = self.point1 + 1
         elif self.out_of_bounds == True and self.spawn == -1:
             self.x = (screenx/2)
             self.y = (screeny/2)
             self.speedX = 1.5
             self.speedY = 1.5
             self.out_of_bounds = False
+            self.point2 = self.point2 + 1
         self.COLOR = 7
         self.spawn = 0
     
@@ -909,4 +912,3 @@ class Ball:
             self.COLOR = 9
         elif(self.speedX >= 4 or self.speedX <= -4):
             self.COLOR = 8
-

@@ -87,6 +87,9 @@ class App:
         self.player3.draw()
         self.player4.draw()
         self.ball.draw()
+        pyxel.text((screenx/2)-20,30,str(self.ball.point1),7)
+        pyxel.text((screenx/2)+20,30,str(self.ball.point2),7)
+      
 
 
 screenx = 750
