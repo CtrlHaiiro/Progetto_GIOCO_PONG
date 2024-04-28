@@ -1,8 +1,6 @@
 import pyxel
-import time
 import random as rd
 from math import copysign, ceil
-
 
 screenx = 750
 screeny= 420
@@ -28,7 +26,21 @@ class Ball:
     def update(self):
         self.x += self.speedX
         self.y += self.speedY
-        timerTime = 1000
+        
+        timerTime = 1
+        if timerTime == 1:
+            timerTime = 0
+            timerTime = timerTime + 1
+            if self.speedX > 0:
+                self.speedX = self.speedX + 0.001
+            else:
+                self.speedX = self.speedX - 0.001
+            if self.speedY > 0:
+                self.speedY = self.speedY + 0.001
+            else:
+                self.speedY = self.speedY - 0.001
+            print(timerTime)
+        
         if self.x + self.r >= screenx - 73:
             self.out_of_bounds = True
             self.spawn = 1
@@ -465,7 +477,7 @@ class Ball:
             n = rd.randrange(-1,2,2)
             m = rd.randint(-1,1)
 
-             #Primo segmento
+            #Primo segmento
             #Se sia la palla e il paddle salgono
             if (
             sub_ball_x + self.r >= obj.x
