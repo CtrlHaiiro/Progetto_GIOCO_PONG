@@ -34,6 +34,12 @@ class Ball:
         elif self.x - self.r <= 71:
             self.out_of_bounds = True
             self.spawn = -1
+        
+        elif self.x + self.r <= 110 and self.x + self.r >= 109:
+            self.speedX = (self.speedX * 1) - 0.1
+        
+        elif self.x - self.r >= 638 and self.x - self.r >=639:
+            self.speedX = (self.speedX * 1) + 0.1
 
         elif self.y - self.r <= 51:
             self.speedY = (self.speedY * -1)+0.1
@@ -45,7 +51,8 @@ class Ball:
             self.speedX = (self.speedX * 1) + 0.1
 
             self.directionY = 1
-    
+        print(self.speedX)
+
     #Controllo collisione paddle 1
     def detect_collision_1(self, obj, player=False):
         num_steps = ceil(max(abs(self.speedX), abs(self.speedY)))
@@ -855,7 +862,7 @@ class Ball:
             ):
                 if player3:
                     self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
+                    self.speedY = self.speedY * -1
                     return True
             return False
 
@@ -886,19 +893,20 @@ class Ball:
                     return True
             return False
     
+    #Respawn Palla
     def Respawn_Ball(self):
         if self.out_of_bounds == True and self.spawn == 1:
             self.x = (screenx/2)
             self.y = (screeny/2)
             self.speedX = -1.5
-            self.speedY = -1.5
+            self.speedY = -0.5
             self.out_of_bounds = False
             self.point1 = self.point1 + 1
         elif self.out_of_bounds == True and self.spawn == -1:
             self.x = (screenx/2)
             self.y = (screeny/2)
             self.speedX = 1.5
-            self.speedY = 1.5
+            self.speedY = 0.5
             self.out_of_bounds = False
             self.point2 = self.point2 + 1
         self.COLOR = 7
