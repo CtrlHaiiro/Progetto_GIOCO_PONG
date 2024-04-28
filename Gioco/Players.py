@@ -71,8 +71,8 @@ class Player3:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.w = 6
-        self.h = 6
+        self.w = 8
+        self.h = 8
         self.direction = 0
 
     def update(self):
@@ -104,15 +104,17 @@ class Player3:
                 self.x = self.x - 3
                 self.direction = 4
     def draw(self):
-        pyxel.blt(self.x, self.y, 0, 33, 9, 6, 6)
+        pyxel.circb(self.x+4, self.y+4, 4, 0)
+        pyxel.blt(self.x, self.y, 0, 32,8,self.w, self.h)
+        
 
 #Giocatore 4 Small
 class Player4:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.w = 6
-        self.h = 6
+        self.w = 8
+        self.h = 8
         self.directionX = 0
         self.directionY = 0
 
@@ -146,7 +148,8 @@ class Player4:
                 self.direction = 4
 
     def draw(self):
-        pyxel.blt(self.x, self.y, 0, 33, 1, 6, 6)
+        pyxel.circb(self.x+4, self.y+4, 4, 0)
+        pyxel.blt(self.x, self.y, 0, 32, 0, self.w, self.h)
 
 screenx = 750
 screeny= 420

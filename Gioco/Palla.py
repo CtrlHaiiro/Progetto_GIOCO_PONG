@@ -11,7 +11,7 @@ class Ball:
         self.x = x
         self.y = y
         self.speedX = -1.5
-        self.speedY = -1.0
+        self.speedY = -0.5
         self.r = 2
         self.out_of_bounds = False
         self.spawn = 0
