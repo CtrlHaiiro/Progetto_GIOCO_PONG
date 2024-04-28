@@ -1,4 +1,5 @@
 import pyxel
+import time
 import random as rd
 from math import copysign, ceil
 
@@ -27,6 +28,7 @@ class Ball:
     def update(self):
         self.x += self.speedX
         self.y += self.speedY
+        timerTime = 1000
         if self.x + self.r >= screenx - 73:
             self.out_of_bounds = True
             self.spawn = 1
@@ -35,23 +37,25 @@ class Ball:
             self.out_of_bounds = True
             self.spawn = -1
         
-        elif self.x + self.r <= 110 and self.x + self.r >= 109:
-            self.speedX = (self.speedX * 1) - 0.1
-        
-        elif self.x - self.r >= 638 and self.x - self.r >=639:
-            self.speedX = (self.speedX * 1) + 0.1
-
         elif self.y - self.r <= 51:
-            self.speedY = (self.speedY * -1)+0.1
-            self.speedX = (self.speedX * 1) - 0.1
+            self.speedY = self.speedY * -1
+            self.speedX = self.speedX * 1
             self.directionY = -1
             
         elif self.y + self.r >= screeny - 52:
-            self.speedY = (self.speedY * -1) - 0.1
-            self.speedX = (self.speedX * 1) + 0.1
-
+            self.speedY = self.speedY * -1
+            self.speedX = self.speedX * 1 
             self.directionY = 1
         print(self.speedX)
+
+        if timerTime == 1000:
+            timerTime = 0
+            if self.speedX > 0:
+                self.speedX = self.speedX + 0.1
+            elif self.speedX < 0:
+                self.speedX = self.speedX - 0.1
+
+
 
     #Controllo collisione paddle 1
     def detect_collision_1(self, obj, player=False):

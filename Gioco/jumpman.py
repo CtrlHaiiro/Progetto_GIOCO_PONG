@@ -1,4 +1,5 @@
 import pyxel
+import time 
 import random as rd
 from math import copysign, ceil
 from Palla import Ball
