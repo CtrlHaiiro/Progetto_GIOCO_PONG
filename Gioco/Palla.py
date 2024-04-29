@@ -39,7 +39,6 @@ class Ball:
                 self.speedY = self.speedY + 0.001
             else:
                 self.speedY = self.speedY - 0.001
-            print(timerTime)
         
         if self.x + self.r >= screenx - 73:
             self.out_of_bounds = True
@@ -58,7 +57,8 @@ class Ball:
             self.speedY = self.speedY * -1
             self.speedX = self.speedX * 1 
             self.directionY = 1
-        print(self.speedX)
+        #print(self.speedX)
+        print(self.directionY)
 
         if timerTime == 1000:
             timerTime = 0
@@ -918,6 +918,7 @@ class Ball:
             self.speedY = -0.5
             self.out_of_bounds = False
             self.point1 = self.point1 + 1
+            self.directionY= 1
         elif self.out_of_bounds == True and self.spawn == -1:
             self.x = (screenx/2)
             self.y = (screeny/2)
@@ -925,6 +926,7 @@ class Ball:
             self.speedY = 0.5
             self.out_of_bounds = False
             self.point2 = self.point2 + 1
+            self.directionY = -1
         self.COLOR = 7
         self.spawn = 0
     
