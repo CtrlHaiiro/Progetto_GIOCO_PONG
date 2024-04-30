@@ -45,6 +45,7 @@ class Player2:
         self.direction = 0
 
     def update(self):
+        self.direction = 0
         if pyxel.btn(pyxel.KEY_UP):
             if self.y < 53:
                 pass
@@ -58,7 +59,7 @@ class Player2:
             else:
                 self.y = self.y + 3
                 self.direction = -1
-        print(self.direction)
+        #print(self.direction)
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 16, 0, 8, 8)
