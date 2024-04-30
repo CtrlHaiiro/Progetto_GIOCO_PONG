@@ -7,16 +7,16 @@ from Players import Player1, Player2, Player3, Player4
 
 ### TO DO LIST: ###
 # DONE - Aggiungi collisione paddle con campo
-# TO DO - Aggiungi sistema punteggio
+# DONE - Aggiungi sistema punteggio
 # IN PROGRESS - Soundtrack
 # TO DO - Sound effects
-# TO DECIDE - Grafica sfondo(?)
+# RIVALUTATO | N/A - Grafica sfondo(?)
 # TO DO - Balancing
 # DONE - Player 3 e 4 Sprite
-# TO DECIDE Allargare l'area di Player 3 e 4??
-# TO DO - Finire le collisioni tra palla e paddle(paddle 1 e 2 fatti)(2/4)
+# RIVALUTATO | N/A - Allargare l'area di Player 3 e 4??
+# IN PROGRESS - Finire le collisioni tra palla e paddle(paddle 1 e 2 fatti)(2/4)
 # TO DO - Aggiugere una schermata di scelta modalità
-# TO DO - Sistemare i Player 3 e 4
+# IN PROGRESS - Sistemare i Player 3 e 4
 # DONE Cambiare colore alla palla 
 
 #Principale 
@@ -90,8 +90,6 @@ class App:
         self.ball.draw()
         pyxel.text((screenx/2)-20,30,str(self.ball.point1),7)
         pyxel.text((screenx/2)+20,30,str(self.ball.point2),7)
-      
-
 
 screenx = 750
 screeny= 420
