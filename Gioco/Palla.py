@@ -57,8 +57,7 @@ class Ball:
             self.speedY = self.speedY * -1
             self.speedX = self.speedX * 1 
             self.directionY = 1
-        #print(self.speedX)
-        print(self.directionY)
+        #print(self.directionY)
 
         if timerTime == 1000:
             timerTime = 0

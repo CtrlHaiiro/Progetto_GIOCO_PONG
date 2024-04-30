@@ -58,6 +58,7 @@ class Player2:
             else:
                 self.y = self.y + 3
                 self.direction = -1
+        print(self.direction)
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, 16, 0, 8, 8)
