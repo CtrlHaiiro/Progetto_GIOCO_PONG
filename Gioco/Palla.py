@@ -29,7 +29,7 @@ class Ball:
     def update(self):
         self.x += self.speedX
         self.y += self.speedY
-        
+        #Aumenta la velocità col tempo
         timerTime = 1
         if timerTime == 1:
             timerTime = 0
@@ -881,6 +881,10 @@ class Ball:
                 if player3:
                     self.speedX = self.speedX * -1
                     self.speedY = self.speedY * -1
+                    if self.directionY == -1:
+                        self.directionY = 1
+                    elif self.directionY == 1:
+                        self.directionY = -1
                     return True
             return False
 
@@ -907,7 +911,11 @@ class Ball:
             ):
                 if player4:
                     self.speedX = self.speedX * -1
-                    self.speedY = self.speedY * n
+                    self.speedY = self.speedY * -1
+                    if self.directionY == -1:
+                        self.directionY = 1
+                    elif self.directionY == 1:
+                        self.directionY = -1
                     return True
             return False
     
