@@ -16,12 +16,15 @@ class Ball:
         self.out_of_bounds = False
         self.spawn = 0
         self.directionY = 1
-        self.COLOR = 7
         self.point1 = 0
         self.point2 = 0
+        self.u = 42
+        self.v = 2
+        self.w = 4
+        self.h = 4
 
     def draw(self):
-        pyxel.circ(self.x, self.y, self.r, self.COLOR)
+        pyxel.blt(self.x, self.y, 0, self.u, self.v, self.w, self.h)
 
     def update(self):
         self.x += self.speedX
@@ -932,8 +935,17 @@ class Ball:
     #Cambiare colore alla palla
     def Change_Color(self):
         if (self.speedX >= 2 or self.speedX <= -2):
-            self.COLOR = 10
+            self.u = 50
+            self.v = 2
         elif (self.speedX >= 3 or self.speedX <= -3):
-            self.COLOR = 9
+            self.u = 42
+            self.v = 10
         elif(self.speedX >= 4 or self.speedX <= -4):
-            self.COLOR = 8
+            self.u = 50 
+            self.v = 10
+        elif(self.speedX >= 5 or self.speedX <= -5):
+            self.u = 58
+            self.v = 2
+        elif(self.speedX >= 6 or self.speedX <= -6):
+            self.u = 56
+            self.v = 8
