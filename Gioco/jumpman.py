@@ -31,22 +31,7 @@ class App:
         pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
         pyxel.run(self.update, self.draw)
 
-    def update(self):
-        self.player.update()
-        self.player2.update()
-        self.player3.update()
-        self.player4.update()
-        self.ball.update()
-        self.check_collision_1()
-        self.check_collision_2()
-        self.check_collision_3()
-        self.check_collision_4()
-        self.respawn()
-        self.change_color()
-        if pyxel.btn(pyxel.KEY_Q):
-            pyxel.quit()
-
-#Collisioni   
+    #Collisioni   
     def check_collision_1(self):
         collision = self.ball.detect_collision_1(self.player, player=True)
         if collision:
@@ -66,6 +51,23 @@ class App:
         collision = self.ball.detect_collision_4(self.player4, player4=True)
         if collision:
             pass
+
+    def update(self):
+        self.ball.update()
+        self.player.update()
+        self.player2.update()
+        self.player3.update()
+        self.player4.update()
+        self.check_collision_1()
+        self.check_collision_2()
+        self.check_collision_3()
+        self.check_collision_4()
+        self.respawn()
+        self.change_color()
+        if pyxel.btn(pyxel.KEY_Q):
+            pyxel.quit()
+
+
     #Respawn palla
     def respawn(self):
         resp = self.ball.Respawn_Ball()
