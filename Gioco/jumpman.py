@@ -8,8 +8,8 @@ from Players import Player1, Player2, Player3, Player4
 ### TO DO LIST: ###
 # DONE - Aggiungi collisione paddle con campo
 # DONE - Aggiungi sistema punteggio
-# IN PROGRESS - Soundtrack
-# TO DO - Sound effects
+# DONE - Soundtrack
+# DONE - Sound effects
 # RIVALUTATO | N/A - Grafica sfondo(?)
 # TO DO - Balancing
 # DONE - Player 3 e 4 Sprite
