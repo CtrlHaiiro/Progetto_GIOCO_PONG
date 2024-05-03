@@ -12,16 +12,16 @@ class Ball:
         self.y = y
         self.speedX = -1.5
         self.speedY = -0.5
-        self.r = 2
+        self.r = 3
         self.out_of_bounds = False
         self.spawn = 0
         self.directionY = 1
         self.point1 = 0
         self.point2 = 0
-        self.u = 42
-        self.v = 2
-        self.w = 4
-        self.h = 4
+        self.u = 41
+        self.v = 1
+        self.w = 7
+        self.h = 7
 
     def draw(self):
         pyxel.blt(self.x, self.y, 0, self.u, self.v, self.w, self.h)
@@ -51,12 +51,12 @@ class Ball:
             self.out_of_bounds = True
             self.spawn = -1
         
-        elif self.y - self.r <= 51:
+        elif self.y - self.r <= 50:
             self.speedY = self.speedY * -1
             self.speedX = self.speedX * 1
             self.directionY = -1
             
-        elif self.y + self.r >= screeny - 52:
+        elif self.y + self.r >= screeny - 55:
             self.speedY = self.speedY * -1
             self.speedX = self.speedX * 1 
             self.directionY = 1
@@ -937,23 +937,21 @@ class Ball:
             self.out_of_bounds = False
             self.point2 = self.point2 + 1
             self.directionY = -1
-        self.COLOR = 7
+        self.u = 41
+        self.v = 1
         self.spawn = 0
     
     #Cambiare colore alla palla
     def Change_Color(self):
         if (self.speedX >= 2 or self.speedX <= -2):
-            self.u = 50
-            self.v = 2
+            self.u = 49
+            self.v = 1
         elif (self.speedX >= 3 or self.speedX <= -3):
-            self.u = 42
-            self.v = 10
+            self.u = 41
+            self.v = 9
         elif(self.speedX >= 4 or self.speedX <= -4):
-            self.u = 50 
-            self.v = 10
+            self.u = 49
+            self.v = 9
         elif(self.speedX >= 5 or self.speedX <= -5):
-            self.u = 58
-            self.v = 2
-        elif(self.speedX >= 6 or self.speedX <= -6):
-            self.u = 56
-            self.v = 8
+            self.u = 57
+            self.v = 1
