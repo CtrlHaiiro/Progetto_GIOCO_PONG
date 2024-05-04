@@ -29,6 +29,7 @@ class Ball:
     def update(self):
         self.x += self.speedX
         self.y += self.speedY
+        
         #Aumenta la velocità col tempo
         timerTime = 1
         if timerTime == 1:
@@ -950,12 +951,12 @@ class Ball:
         if (self.speedX >= 2 or self.speedX <= -2):
             self.u = 49
             self.v = 1
-        elif (self.speedX >= 3 or self.speedX <= -3):
+        elif (self.speedX >= 2.1 or self.speedX <= -2.1):
             self.u = 41
             self.v = 9
-        elif(self.speedX >= 4 or self.speedX <= -4):
+        elif(self.speedX >= 2.2 or self.speedX <= -2.2):
             self.u = 49
             self.v = 9
-        elif(self.speedX >= 5 or self.speedX <= -5):
+        elif(self.speedX >= 2.3 or self.speedX <= -2.3):
             self.u = 57
             self.v = 1
