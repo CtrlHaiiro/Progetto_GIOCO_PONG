@@ -19,6 +19,25 @@ from Players import Player1, Player2, Player3, Player4
 # IN PROGRESS - Sistemare i Player 3 e 4
 # DONE Cambiare colore alla palla 
 
+class Start:
+    def __init__(self):
+        pyxel.init(screenx, screeny, display_scale=2, title = "Screen", fps = 60)
+
+    def update(self):
+        self.x = pyxel.mouse_x
+        self.y = pyxel.mouse_y
+
+    def draw(self):
+        pyxel.cls(0)
+        pyxel.circ(screenx/2,screeny/2,10,6)
+        pyxel.rect(self.x,self.y,8,8,7)
+
+    def start(self):
+        #if self.x == screenx/2 and self.y == screeny/2 and pyxel.MOUSE_BUTTON_LEFT:
+            #App()
+            print("CIAONE")
+            pass
+
 #Principale 
 class App:
     def __init__(self):
@@ -29,6 +48,7 @@ class App:
         self.player4 = Player4(screenx - 160, screeny/2-2)
         self.ball = Ball(screenx/2, screeny/2)
         pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
+        pyxel.playm(0,loop=True)
         pyxel.run(self.update, self.draw)
 
     #Collisioni   
@@ -96,4 +116,4 @@ class App:
 screenx = 750
 screeny= 420
 
-App()
+Start()
