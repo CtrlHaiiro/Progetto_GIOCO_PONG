@@ -19,6 +19,23 @@ from Players import Player1, Player2, Player3, Player4
 # IN PROGRESS - Sistemare i Player 3 e 4
 # DONE Cambiare colore alla palla 
 
+class Start:
+    def __init__(self):
+        pyxel.init(screenx, screeny, display_scale=2, title = "Screen", fps = 60)
+        pyxel.run(self.update, self.draw)
+
+    def update(self):
+        self.x = pyxel.mouse_x
+        self.y = pyxel.mouse_y
+        pyxel.mouse(visible=True)
+        if pyxel.btn(pyxel.KEY_H):
+            pyxel.play(0,61)
+            App()
+
+    def draw(self):
+        pyxel.cls(0)
+        pyxel.circ(screenx/2,screeny/2,10,6)
+
 #Principale 
 class App:
     def __init__(self):
@@ -101,4 +118,4 @@ class App:
 screenx = 750
 screeny= 420
 
-App()
+Start()

@@ -69,9 +69,9 @@ class Ball:
         if timerTime == 1000:
             timerTime = 0
             if self.speedX > 0:
-                self.speedX = self.speedX + 0.1
+                self.speedX = self.speedX + 0.15
             elif self.speedX < 0:
-                self.speedX = self.speedX - 0.1
+                self.speedX = self.speedX - 0.15
 
 
 
@@ -950,12 +950,12 @@ class Ball:
         if (self.speedX >= 2 or self.speedX <= -2):
             self.u = 49
             self.v = 1
-        elif (self.speedX >= 2.3 or self.speedX <= -2.3):
+        elif (self.speedX >= 3 or self.speedX <= -3):
             self.u = 41
             self.v = 9
-        elif(self.speedX >= 2.7 or self.speedX <= -2.7):
+        elif(self.speedX >= 4 or self.speedX <= -4):
             self.u = 49
             self.v = 9
-        elif(self.speedX >= 3.2 or self.speedX <= -3.2):
+        elif(self.speedX >= 5 or self.speedX <= -5):
             self.u = 57
             self.v = 1
