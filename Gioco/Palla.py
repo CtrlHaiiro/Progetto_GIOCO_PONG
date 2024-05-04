@@ -35,31 +35,35 @@ class Ball:
             timerTime = 0
             timerTime = timerTime + 1
             if self.speedX > 0:
-                self.speedX = self.speedX + 0.001
+                self.speedX = self.speedX + 0.0015
             else:
-                self.speedX = self.speedX - 0.001
+                self.speedX = self.speedX - 0.0015
             if self.speedY > 0:
-                self.speedY = self.speedY + 0.001
+                self.speedY = self.speedY + 0.0015
             else:
-                self.speedY = self.speedY - 0.001
+                self.speedY = self.speedY - 0.0015
         
         if self.x + self.r >= screenx - 73:
             self.out_of_bounds = True
             self.spawn = 1
+            pyxel.play(3,62)
 
         elif self.x - self.r <= 71:
             self.out_of_bounds = True
             self.spawn = -1
+            pyxel.play(3,62)
         
         elif self.y - self.r <= 50:
             self.speedY = self.speedY * -1
             self.speedX = self.speedX * 1
             self.directionY = -1
+            pyxel.play(3,63)
             
         elif self.y + self.r >= screeny - 55:
             self.speedY = self.speedY * -1
             self.speedX = self.speedX * 1 
             self.directionY = 1
+            pyxel.play(3,63)
         #print(self.directionY)
 
         if timerTime == 1000:
@@ -946,12 +950,12 @@ class Ball:
         if (self.speedX >= 2 or self.speedX <= -2):
             self.u = 49
             self.v = 1
-        elif (self.speedX >= 3 or self.speedX <= -3):
+        elif (self.speedX >= 2.3 or self.speedX <= -2.3):
             self.u = 41
             self.v = 9
-        elif(self.speedX >= 4 or self.speedX <= -4):
+        elif(self.speedX >= 2.7 or self.speedX <= -2.7):
             self.u = 49
             self.v = 9
-        elif(self.speedX >= 5 or self.speedX <= -5):
+        elif(self.speedX >= 3.2 or self.speedX <= -3.2):
             self.u = 57
             self.v = 1
