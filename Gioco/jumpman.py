@@ -28,9 +28,12 @@ class Start:
         self.x = pyxel.mouse_x
         self.y = pyxel.mouse_y
         pyxel.mouse(visible=True)
-        if pyxel.btn(pyxel.KEY_H):
+        if pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
             pyxel.play(0,61)
             App()
+        if pyxel.btn(pyxel.KEY_Q) or pyxel.btn(pyxel.KEY_ESCAPE):
+            pyxel.quit()
+
 
     def draw(self):
         pyxel.cls(0)
