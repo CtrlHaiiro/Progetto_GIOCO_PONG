@@ -37,8 +37,7 @@ class Start:
 
     def draw(self):
         pyxel.cls(0)
-        pyxel.circ(screenx/2,screeny/2,10,6)
-
+       
 #Principale 
 class App:
     def __init__(self):
