@@ -22,6 +22,8 @@ from Players import Player1, Player2, Player3, Player4
 class Start:
     def __init__(self):
         pyxel.init(screenx, screeny, display_scale=2, title = "Screen", fps = 60)
+        pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
+        pyxel.playm(2,loop=True)
         pyxel.run(self.update, self.draw)
 
     def update(self):
@@ -37,7 +39,7 @@ class Start:
 
     def draw(self):
         pyxel.cls(0)
-       
+        
 #Principale 
 class App:
     def __init__(self):
@@ -105,6 +107,13 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
+        lato = 0
+        altezz = 0
+        for altezz in range(0, 640, 32):
+            for lato in range(0, 980, 32):
+                pyxel.blt(lato, altezz, 2, 0, 0, 32, 32)
+            
+        pyxel.rectb(71, 51, screenx - 139, screeny -99, 0)
         pyxel.rect(70, 50, screenx - 140, screeny -100, 7)
         pyxel.rect(71, 51, screenx - 142, screeny -102, 0)
         pyxel.rect(screenx - 73, 51, 3, screeny -102, 9)
