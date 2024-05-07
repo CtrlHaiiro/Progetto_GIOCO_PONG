@@ -10,7 +10,7 @@ class Ball:
     def __init__(self,x,y):
         self.x = x
         self.y = y
-        self.speedX = -1.5
+        self.speedX = -2.5
         self.speedY = -0.5
         self.r = 3
         self.out_of_bounds = False
@@ -929,7 +929,7 @@ class Ball:
         if self.out_of_bounds == True and self.spawn == 1:
             self.x = (screenx/2)
             self.y = (screeny/2)
-            self.speedX = -1.5
+            self.speedX = -2.5
             self.speedY = -0.5
             self.out_of_bounds = False
             self.point1 = self.point1 + 1
@@ -937,7 +937,7 @@ class Ball:
         elif self.out_of_bounds == True and self.spawn == -1:
             self.x = (screenx/2)
             self.y = (screeny/2)
-            self.speedX = 1.5
+            self.speedX = 2.5
             self.speedY = 0.5
             self.out_of_bounds = False
             self.point2 = self.point2 + 1
@@ -948,15 +948,15 @@ class Ball:
     
     #Cambiare colore alla palla
     def Change_Color(self):
-        if (self.speedX >= 2 or self.speedX <= -2):
+        if (self.speedX >= 3.3 or self.speedX <= -3.3):
             self.u = 49
             self.v = 1
-        elif (self.speedX >= 2.1 or self.speedX <= -2.1):
+        if (self.speedX >= 4.4 or self.speedX <= -4.4):
             self.u = 41
             self.v = 9
-        elif(self.speedX >= 2.2 or self.speedX <= -2.2):
+        if(self.speedX >= 5 or self.speedX <= -5):
             self.u = 49
             self.v = 9
-        elif(self.speedX >= 2.3 or self.speedX <= -2.3):
+        if(self.speedX >= 5.9 or self.speedX <= -5.9):
             self.u = 57
             self.v = 1
