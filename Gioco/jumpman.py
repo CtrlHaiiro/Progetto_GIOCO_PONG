@@ -41,15 +41,11 @@ class Start:
         pyxel.cls(0)
         lato = 0
         altezz = 0
-        pyxel.pal(7,1)
-        pyxel.pal(8,2)
         for altezz in range(0, 640, 31):
             for lato in range(0, 980, 79):
-                pyxel.blt(lato, altezz, 1, 0, 0, 79, 31) 
-        pyxel.pal(1,7)
-        pyxel.pal(2,8)    
-        pyxel.rect(360,170,70,60,0)
-        pyxel.blt(360, 170, 1, 0, 0, 79, 31)       
+                pyxel.blt(lato, altezz, 1, 0, 32, 79, 31) 
+        pyxel.rect(315, 175, 109, 61, 0)   
+        pyxel.blt(330, 190, 1, 0, 0, 79, 31)       
 
         
 #Principale 
