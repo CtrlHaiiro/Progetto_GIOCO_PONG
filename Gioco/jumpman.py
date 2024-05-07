@@ -56,7 +56,7 @@ class App:
         self.player2 = Player2(screenx - 110, screeny/2 - 20)
         self.player3 = Player3(150, screeny/2-2)
         self.player4 = Player4(screenx - 160, screeny/2-2)
-        self.ball = Ball(screenx/2, screeny/2)
+        self.ball = Ball((screenx/2)-4, (screeny/2)-3)
         pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
         pyxel.playm(0,loop=True)
         pyxel.run(self.update, self.draw)
@@ -124,6 +124,10 @@ class App:
         pyxel.rectb(71, 51, screenx - 139, screeny -99, 0)
         pyxel.rect(70, 50, screenx - 140, screeny -100, 7)
         pyxel.rect(71, 51, screenx - 142, screeny -102, 0)
+        pyxel.rect(374,51,1,318,1)
+        pyxel.rect(109,51,1,318,1)
+        pyxel.rect(638,51,1,318,1)
+        pyxel.circb(374, screeny/2,10,1)
         pyxel.rect(screenx - 73, 51, 3, screeny -102, 9)
         pyxel.rect(70, 51, 3, screeny -102, 3)
         self.player.draw()
@@ -131,8 +135,8 @@ class App:
         self.player3.draw()
         self.player4.draw()
         self.ball.draw()
-        pyxel.text((screenx/2)-20,30,str(self.ball.point1),7)
-        pyxel.text((screenx/2)+20,30,str(self.ball.point2),7)
+        pyxel.text((screenx/2)-30,60,str(self.ball.point1),12)
+        pyxel.text((screenx/2)+30,60,str(self.ball.point2),8)
 
 screenx = 750
 screeny= 420

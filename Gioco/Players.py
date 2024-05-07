@@ -93,18 +93,19 @@ class Player3:
                 self.direction = 2
 
         if pyxel.btn(pyxel.KEY_G)or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT):
-            if self.x+self.w > (screenx/2):
+            if self.x+self.w > (screenx/2)-2:
                 pass
             else:
                 self.x = self.x + 3
                 self.direction = 3
 
         if pyxel.btn(pyxel.KEY_D)or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT):
-            if self.x-self.w <= 68:
+            if self.x-self.w<= 105:
                 pass
             else:
                 self.x = self.x - 3
                 self.direction = 4
+
     def draw(self):
         pyxel.circb(self.x+4, self.y+4, 4, 0)
         pyxel.blt(self.x, self.y, 0, 32,8,self.w, self.h)
@@ -136,14 +137,14 @@ class Player4:
                 self.direction = 2
 
         if pyxel.btn(pyxel.KEY_L)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT):
-            if self.x+self.w > (screenx-73):
+            if self.x+self.w >= 636:
                 pass
             else:
                 self.x = self.x + 3
                 self.direction = 3
 
         if pyxel.btn(pyxel.KEY_J)or pyxel.btn(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT):
-            if self.x-self.w <= (screenx/2):
+            if self.x-self.w <= (screenx/2)-6:
                 pass
             else:
                 self.x = self.x - 3

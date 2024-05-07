@@ -927,16 +927,16 @@ class Ball:
     #Respawn Palla
     def Respawn_Ball(self):
         if self.out_of_bounds == True and self.spawn == 1:
-            self.x = (screenx/2)
-            self.y = (screeny/2)
+            self.x = (screenx/2)-4
+            self.y = (screeny/2)-3
             self.speedX = -2.5
             self.speedY = -0.5
             self.out_of_bounds = False
             self.point1 = self.point1 + 1
             self.directionY= 1
         elif self.out_of_bounds == True and self.spawn == -1:
-            self.x = (screenx/2)
-            self.y = (screeny/2)
+            self.x = (screenx/2)-4
+            self.y = (screeny/2)-3
             self.speedX = 2.5
             self.speedY = 0.5
             self.out_of_bounds = False
