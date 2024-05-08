@@ -23,7 +23,7 @@ class Start:
     def __init__(self):
         pyxel.init(screenx, screeny, display_scale=2, title = "Screen", fps = 60)
         pyxel.load("Assets/FILE_EDIT_PYXEL.pyxres")
-        pyxel.playm(2,loop=True)
+        pyxel.playm(1,loop=True)
         pyxel.run(self.update, self.draw)
 
     def update(self):
